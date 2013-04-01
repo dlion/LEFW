@@ -5,7 +5,7 @@ class Config {
     private $dbname;
     private $user_db;
     private $pass_db;
-    private $name_site = "Links Every Fuckin' Where";
+    const name_site = 'Links Every fuckin\' where';
     private $admin;
     //Istanza
     private static $istanza = null;
@@ -38,7 +38,7 @@ class Config {
     }
     
     public function getNameSite() {
-        return $this->name_site;
+        return Config::name_site;
     }
     
     public function getAdmin() {
