@@ -14,3 +14,4 @@ Dependencies
 * `PDO`
 * `php 5`
 * `MySQL`
+* `Kube CSS Framework`
