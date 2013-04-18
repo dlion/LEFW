@@ -5,7 +5,7 @@ class Config {
     private $dbname;
     private $user_db;
     private $pass_db;
-    const name_site = 'Links Every fuckin\' where';
+    const name_site = 'Links Every Fuckin\' Where';
     private $admin;
     //Istanza
     private static $istanza = null;

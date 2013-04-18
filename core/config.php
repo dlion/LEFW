@@ -12,7 +12,7 @@ include_once('db.class.php');
  * - @password - Password to use database
  * - @admin - Name or nick of admin
  */
-$conf = Config::getIstanza('host','db name','user','password','admin name');
+$conf = Config::getIstanza('@host','@database','@user','@password','@admin');
 
 // Istances
 $db = Db::getIstanza($conf);
