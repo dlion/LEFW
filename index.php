@@ -15,25 +15,14 @@ if($user != false)
 {
     //Link Istance
     $link = Link::getIstanza($user->getId(),$db);
+    //Category Istance
+    $category = Category::getIstanza($db);
 }
 else
 {
     //Nessun user trovato
 }
 
-//Category Istance
-$category = Category::getIstanza($db);
-
-
-//If password is correct add link to database
-if(isset($_POST['name_site']) && isset($_POST['link_site']) && isset($_POST['password_site']) && isset($_POST['category'])) {
-    if($user->checkMyPass($_POST['password_site']) === true)
-        $ris = $link->insertLink($_POST['name_site'],$_POST['link_site'],$_POST['category']);
-    else
-    {
-        //Password errata
-    }
-}
 //User Information
 $io = array (   
         "id" => $user->getId(),
@@ -43,10 +32,17 @@ $io = array (
         "pic" => $user->getPic(),
         "bio" => $user->getBio()
     );
+//Prendo tutte le categorie
+$categoria = $category->getAllCategory();
+//Counter Category
+$i=0;
 /*
 Ora ho creato la classe delle categorie così da suddividere i link in categorie
 Bisogna ancora aggiungere metodi per togliere le categorie
                           metodi per togliere link
+                          motodi per cambiare la password
+                          implementare la criptazione della password
+                          
 */
 ?>
 <!DOCTYPE html>
@@ -59,15 +55,75 @@ Bisogna ancora aggiungere metodi per togliere le categorie
 
 	    <link rel="stylesheet" type="text/css" href="css/kube.min.css" />
 	    <link rel="stylesheet" type="text/css" href="css/master.css" />
-        <link rel="stylesheet" type="text/css" href="css/dl.css" />
         <link href='http://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
     </head>
-   </head>
     <body>
         <div class="wrapper">
             <header id="header" class="group">
-		        <h1><?php echo htmlspecialchars($conf->getNameSite()." - ".$io['nick']); ?></h1>
+		          <h1><?php echo htmlspecialchars($conf->getNameSite()." - ".$io['nick']); ?></h1>
+                <nav class="nav-tabs">
+                    <ul>
+    					        <li><span>Home</span></li>
+                      <li><a href="priv.php">Private</a></li>
+    					        <li><a href="add.php">Add</a></li>
+                      <li><a href="del.php">Del</a></li>
+				            </ul>
+			          </nav>
 	        </header>
+          <hr>
+<?php
+if($categoria !== false)
+{
+    foreach($categoria as $cat)
+    {
+        $link_by_cat = $link->getPublicLinkByCategory($cat['id']);
+        if($link_by_cat != false)
+        {
+            if($i % 4 == 0) 
+            {?>
+                <div class='row split'>
+            <?php
+                $i=0; 
+            }
+            $i++;?>
+                <div class='quarter'>
+                    <h2><?php echo $cat['label']; ?></h2>
+                    <h2 class='subheader'><?php echo $cat['descr']; ?></h2>
+                    <table class='width-100 bordered'>
+                        <thead class='thead-black'>
+            <?php
+            foreach($link_by_cat as $lincat)
+            {?>
+                            <tr>
+                                <th>
+                                    <a href='<?php echo $lincat['url'];?>' rel='nofollow'><?php echo $lincat['name'];?></a>
+                                </th>
+                            </tr>
+            <?php
+            }?>  
+                        </thead>
+                    </table>
+                </div>
+            <?php
+            if($i % 4 == 0)
+            {?>
+                </div>
+            <?php
+            }
+        }
+    }
+}
+else
+{?>
+    <div class='row split'>
+        <div class='fivesixth text-centered'>
+            <h1>Nessuna Categoria Trovata</h1>
+            <h1 class='subheader'>L'utente non ha inserito alcuna categoria.</h1>
+        </div>
+    </div>
+<?php 
+}?>
+            </div>
         </div>
     </body>
 </html>
