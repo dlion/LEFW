@@ -8,6 +8,8 @@ include_once('core/link.class.php');
 //Category Class
 include_once('core/category.class.php');
 
+
+
 //User Istance
 //In this moment I developed to one user (me)
 $user = User::getIstanza('dlion',$db);
@@ -26,11 +28,21 @@ else
 //If password is correct add link to database
 if(isset($_POST['name']) && isset($_POST['url']) && isset($_POST['pass']) && isset($_POST['category'])) {
     if($user->checkMyPass($_POST['pass']) === true)
-        $ris = $link->insertLink($_POST['name'],$_POST['url'],$_POST['category']);
+    {
+        $priv = (!isset($_POST['priv'])) ? 0 : 1;
+            
+        $ris = $link->insertLink($_POST['name'],$_POST['url'],$_POST['category'],$priv);
+    }
     else
     {
         //Password errata
-    }
+    }    
+}
+elseif(isset($_POST['name']) && isset($_POST['url']) && isset($_SESSION['saveme']) && isset($_POST['category']) && $_SESSION['saveme'] == 'ok')
+{
+    $priv = (!isset($_POST['priv'])) ? 0 : 1;
+    
+    $ris = $link->insertLink($_POST['name'],$_POST['url'],$_POST['category'],$priv);
 }
 
 //User Information
@@ -62,6 +74,7 @@ $io = array (
                 <nav class="nav-tabs">
                     <ul>
     					<li><a href='index.php'>Home</a></li>
+                        <li><a href="priv.php">Private</a></li>
     					<li><span>Add</span></li>
                         <li><a href="del.php">Del</a></li>
 				    </ul>
@@ -95,9 +108,19 @@ $io = array (
                             </select>
                         </li>
                         <li>
+                            <label>
+                                <input type="checkbox" name="priv" id="priv" value='1'> Private
+                            </label>
+                        </li>
+                    <?php 
+                    if(!isset($_SESSION['saveme']) || $_SESSION['saveme'] !== 'ok')
+                    {?>
+                        <li>
                             <label for="pass" class="bold">Password</label>
                             <input type="password" name="pass" id="pass" size="40" />
                         </li>
+                <?php
+                    } ?>
                         <li class="push">
                             <input type="submit" name="send" class="btn" value="Submit" />
                         </li>
