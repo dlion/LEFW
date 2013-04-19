@@ -53,13 +53,21 @@ class Category {
     }
     
     public function insertCategory($label,$descr) {
-        $query = $this->pdo->prepare("INSERT INTO link_category(label,descr) VALUES(:label,:descr)");
+        if(!empty($label))
+        {
+            $label = htmlspecialchars(trim($label));
+            $descr = htmlspecialchars(trim($descr));
+            
+            $query = $this->pdo->prepare("INSERT INTO link_category(label,descr) VALUES(:label,:descr)");
         
-        $ris = $query->execute(array(':label' => $label,
-                                     ':descr' => $descr
-                                    )
-                              );
-        return $ris;
+            $ris = $query->execute(array(':label' => $label,
+                                         ':descr' => $descr
+                                        )
+                                  );
+            return $ris;
+        }
+        else
+            return false;
     }
 }
 ?>
