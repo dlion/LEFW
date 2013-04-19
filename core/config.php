@@ -1,4 +1,6 @@
 <?php
+//Init Session
+session_start();
 //Config Class
 include_once('config.class.php');
 //DB Class
