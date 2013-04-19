@@ -60,17 +60,17 @@ Bisogna ancora aggiungere metodi per togliere le categorie
     <body>
         <div class="wrapper">
             <header id="header" class="group">
-		          <h1><?php echo htmlspecialchars($conf->getNameSite()." - ".$io['nick']); ?></h1>
+		        <h1><?php echo htmlspecialchars($conf->getNameSite()." - ".$io['nick']); ?></h1>
                 <nav class="nav-tabs">
                     <ul>
-    					        <li><span>Home</span></li>
-                      <li><a href="priv.php">Private</a></li>
-    					        <li><a href="add.php">Add</a></li>
-                      <li><a href="del.php">Del</a></li>
-				            </ul>
-			          </nav>
+    					<li><span>Home</span></li>
+                        <li><a href="priv.php">Private</a></li>
+    					<li><a href="add.php">Add</a></li>
+                        <li><a href="del.php">Del</a></li>
+				    </ul>
+			    </nav>
 	        </header>
-          <hr>
+            <hr>
 <?php
 if($categoria !== false)
 {
@@ -83,7 +83,6 @@ if($categoria !== false)
             {?>
                 <div class='row split'>
             <?php
-                $i=0; 
             }
             $i++;?>
                 <div class='quarter'>
@@ -94,22 +93,24 @@ if($categoria !== false)
             <?php
             foreach($link_by_cat as $lincat)
             {?>
-                            <tr>
-                                <th>
-                                    <a href='<?php echo $lincat['url'];?>' rel='nofollow'><?php echo $lincat['name'];?></a>
-                                </th>
-                            </tr>
+                <tr>
+                    <th>
+                        <a href='<?php echo $lincat['url'];?>' rel='nofollow'><?php echo $lincat['name'];?></a>
+                    </th>
+                </tr>
             <?php
             }?>  
-                        </thead>
-                    </table>
-                </div>
+                    </thead>
+                </table>
+            </div>
             <?php
             if($i % 4 == 0)
             {?>
                 </div>
             <?php
+            $i=0;
             }
+            
         }
     }
 }
@@ -123,7 +124,6 @@ else
     </div>
 <?php 
 }?>
-            </div>
         </div>
     </body>
 </html>
