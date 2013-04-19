@@ -48,6 +48,5 @@ class Config {
     public function getDbPass(){
         return $this->pass_db;
     }
-    
 }
 ?>
