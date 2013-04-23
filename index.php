@@ -63,10 +63,11 @@ Bisogna ancora aggiungere metodi per togliere le categorie
 		        <h1><?php echo htmlspecialchars($conf->getNameSite()." - ".$io['nick']); ?></h1>
                 <nav class="nav-tabs">
                     <ul>
-    					<li><span>Home</span></li>
-                        <li><a href="priv.php">Private</a></li>
-    					<li><a href="add.php">Add</a></li>
-                        <li><a href="del.php">Del</a></li>
+    					<li><span>Public Link</span></li>
+                        <li><a href="priv_link.php">Private Link</a></li>
+        				<li><a href="add_link.php">Add Link</a></li>
+                        <li><a href="del_link.php">Del Link</a></li>
+                        <li><a href="mod_link.php">Modify Link</a></li>
 				    </ul>
 			    </nav>
 	        </header>
@@ -95,7 +96,7 @@ if($categoria !== false)
             {?>
                 <tr>
                     <th>
-                        <a href='<?php echo $lincat['url'];?>' rel='nofollow'><?php echo $lincat['name'];?></a>
+                        <a href='<?php echo $lincat['url'];?>' rel='nofollow' target="_blank"><?php echo $lincat['name'];?></a>
                     </th>
                 </tr>
             <?php
