@@ -28,6 +28,7 @@ class User {
             //Prendo i dati dell'utente
             $query = $pdo->prepare("SELECT id,nick,password,nome,cognome,pic,bio FROM link_profile WHERE nick = :nick");
             $query->execute(array(':nick' => $nick));
+            
             if($query->rowCount() > 0) {
                 $ris = $query->fetch(PDO::FETCH_OBJ);
 
@@ -39,14 +40,13 @@ class User {
                 $this->pic = $ris->pic;
                 $this->bio = $ris->bio;
             }
-            else
-                return false;
+            else throw new Exception("L'utente cercato non è stato trovato");
         }
         catch(Exception $e) {
-            echo $e->getMessage();
+            die($e->getMessage());
         }
     }
-    
+
     public function getId() {
         return $this->id;
     }
