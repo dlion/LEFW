@@ -14,7 +14,7 @@ include_once('user.class.php');
  * - @database - Name of database
  * - @user - User to use database
  * - @password - Password to use database
- * - @admin - Nickname of admin insert in the databse
+ * - @admin - Nickname of admin inserted in the databse
  */
  
 $conf = Config::getIstanza('@host','@database','@user','@password','@admin');
