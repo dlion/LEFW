@@ -5,6 +5,8 @@ session_start();
 include_once('config.class.php');
 //DB Class
 include_once('db.class.php');
+//User Class
+include_once('user.class.php');
 
 /*
  * -- Configuration --
@@ -12,15 +14,14 @@ include_once('db.class.php');
  * - @database - Name of database
  * - @user - User to use database
  * - @password - Password to use database
- * - @admin - Name or nick of admin
+ * - @admin - Nickname of admin insert in the databse
  */
+ 
 $conf = Config::getIstanza('@host','@database','@user','@password','@admin');
 
-// Istances
+// DB and PDO istances
 $db = Db::getIstanza($conf);
-if($db != false)
-    $db = $db->getPDO();
-else
-    //La connessione è fallita
+$db = $db->getPDO();
+//User Istance
+$user = User::getIstanza($conf->getAdmin(),$db);
 ?>
-
