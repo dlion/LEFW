@@ -1,25 +1,13 @@
 <?php
 //Configuration
 include_once('core/config.php');
-//User Class
-include_once('core/user.class.php');
 //Link Class
 include_once('core/link.class.php');
 //Category Class
 include_once('core/category.class.php');
 
-//User Istance
-//In this moment I developed to one user (me)
-$user = User::getIstanza('dlion',$db);
-if($user != false)
-{
-    //Link Istance
-    $link = Link::getIstanza($user->getId(),$db);
-}
-else
-{
-    //Nessun user trovato
-}
+//Link Istance
+$link = Link::getIstanza($user->getId(),$db);
 
 if(isset($_POST['link']) && isset($_SESSION['saveme']) && $_SESSION['saveme'] === 'ok')
 {
