@@ -15,8 +15,18 @@ class Link {
     }
     
     private function __construct($id,$pdo) {
-        $this->id = $id;
-        $this->pdo = $pdo;
+        try {
+
+            if(!empty($id) && !empty($pdo)) {
+                $this->id = $id;
+                $this->pdo = $pdo;
+            }
+            else 
+                throw new Exception("Errore nell'istanziamento delle categorie!");
+        }
+        catch(Exception $e) {
+            die($e->getMessage());
+        }
     }
     
     //Return public links by a category and user
