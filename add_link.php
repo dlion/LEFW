@@ -1,29 +1,15 @@
 <?php
 //Configuration
 include_once('core/config.php');
-//User Class
-include_once('core/user.class.php');
 //Link Class
 include_once('core/link.class.php');
 //Category Class
 include_once('core/category.class.php');
 
-
-
-//User Istance
-//In this moment I developed to one user (me)
-$user = User::getIstanza('dlion',$db);
-if($user != false)
-{
-    //Link Istance
-    $link = Link::getIstanza($user->getId(),$db);
-    //Category Istance
-    $category = Category::getIstanza($db);
-}
-else
-{
-    //Nessun user trovato
-}
+//Link Istance
+$link = Link::getIstanza($user->getId(),$db);
+//Category Istance
+$category = Category::getIstanza($db);
 
 //If password is set or if I have session
 if(isset($_POST['name']) && isset($_POST['url']) && isset($_POST['category']) && isset($_SESSION['saveme']) && $_SESSION['saveme'] == 'ok' ) {
@@ -115,19 +101,19 @@ if(isset($_POST['pass']) && $user->checkMyPass($_POST['pass']) === true ||  isse
 }
 else
 {?>
-<form method="post" action="" class="forms columnar">
-    <fieldset>
-        <ul>
-            <li>
-                <label for="pass" class="bold">Password</label>
-                <input type="password" name="pass" id="pass" size="40" />
-            </li>
-            <li class="push">
-                <input type="submit" name="send" class="btn" value="Submit" />
-            </li>
-        </ul>
-    </fieldset>
-</form>
+            <form method="post" action="" class="forms columnar">
+                <fieldset>
+                    <ul>
+                        <li>
+                            <label for="pass" class="bold">Password</label>
+                            <input type="password" name="pass" id="pass" size="40" />
+                        </li>
+                        <li class="push">
+                            <input type="submit" name="send" class="btn" value="Submit" />
+                        </li>
+                    </ul>
+                </fieldset>
+            </form>
 <?php    
 }?>
         </div>
