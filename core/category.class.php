@@ -15,10 +15,19 @@ class Category {
     }
     
     private function __construct($pdo) {
-        $this->id = $id;
-        $this->pdo = $pdo;
+        try {
+            if(!empty($pdo)) {
+                $this->pdo = $pdo;
+            }
+            else
+                throw new Exception("Errore nell'istanziamento delle categorie.", 1);
+        }
+        catch(Exception $e) {
+            die($e->getMessage());
+        }
+                
     }
-    
+
     public function getAllCategory() {
         $query = $this->pdo->prepare("SELECT id,label,descr FROM link_category");
         $query->execute();
