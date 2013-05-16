@@ -18,8 +18,7 @@ class Db {
             $this->db = new PDO("mysql:host=".$dato->getHost().";dbname=".$dato->getDbName(), $dato->getDbUser(), $dato->getDbPass());
         }
         catch(Exception $e) {
-            echo $e->getMessage();
-            return false;
+            die($e->getMessage());
         }
     }
     
