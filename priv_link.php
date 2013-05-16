@@ -1,27 +1,15 @@
 <?php
 //Configuration
 include_once('core/config.php');
-//User Class
-include_once('core/user.class.php');
 //Link Class
 include_once('core/link.class.php');
 //Category Class
 include_once('core/category.class.php');
 
-//User Istance
-//In this moment I developed to one user (me)
-$user = User::getIstanza('dlion',$db);
-if($user != false)
-{
-    //Link Istance
-    $link = Link::getIstanza($user->getId(),$db);
-    //Category Istance
-    $category = Category::getIstanza($db);
-}
-else
-{
-    //Nessun user trovato
-}
+//Link Istance
+$link = Link::getIstanza($user->getId(),$db);
+//Category Istance
+$category = Category::getIstanza($db);
 
 //User Information
 $io = array (   
@@ -39,7 +27,6 @@ $i=0;
 /*
 Ora ho creato la classe delle categorie così da suddividere i link in categorie
 Bisogna ancora aggiungere metodi per togliere le categorie
-                          metodi per togliere link
                           motodi per cambiare la password
                           implementare la criptazione della password
                           
@@ -114,7 +101,7 @@ if(isset($_POST['pass']) && $user->checkMyPass($_POST['pass']) === true ||  isse
                 {?>
                     </div>
                 <?php
-                $i=0;
+                    $i=0;
                 }
                 
             }
