@@ -18,11 +18,20 @@ class Config {
     }
     
     private function __construct($host,$dbname,$user,$pass,$admin) {
-        $this->host = $host;
-        $this->dbname = $dbname;
-        $this->user_db = $user;
-        $this->pass_db = $pass;
-        $this->admin = $admin;
+        try {
+            if(empty($host) || empty($dbname) || empty($user) || empty($pass) || empty($admin))
+                throw new Exception("Impossibile collegarsi al database, immettere tutti i parametri necessari.");
+                
+            $this->host = $host;
+            $this->dbname = $dbname;
+            $this->user_db = $user;
+            $this->pass_db = $pass;
+            $this->admin = $admin;
+        }
+        catch(Exception $e) {
+            die($e->getMessage());
+        }
+
     }
     
     public function getHost() {
