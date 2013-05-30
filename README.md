@@ -6,7 +6,7 @@ If I'm at university or if I'm at work and I need to save important, funny, inte
 
 *LEFW* it's a _simple_ website to _save links_.
 
-Ho can I do with this shit ?
+What can I do with this shit ?
 ----------------------------
 * You can divide links by category.
 * You can make links private so *you can't see it without a password*
