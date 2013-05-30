@@ -63,7 +63,7 @@ if(isset($_POST['pass']) && $user->checkMyPass($_POST['pass']) === true ||  isse
                 {?>
                     <tr>
                         <th>
-                            <a href='<?php echo $lincat['url'];?>' rel='nofollow'><?php echo $lincat['name'];?></a>
+                            <a href='<?php echo $lincat['url'];?>' rel='nofollow' target='_blank'><?php echo $lincat['name'];?></a>
                         </th>
                     </tr>
                 <?php
