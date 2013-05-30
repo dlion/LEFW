@@ -29,7 +29,7 @@ class Category {
     }
 
     public function getAllCategory() {
-        $query = $this->pdo->prepare("SELECT id,label,descr FROM link_category");
+        $query = $this->pdo->prepare("SELECT id,label,descr FROM link_category ORDER BY label");
         $query->execute();
         if($query->rowCount() > 0) {
             $ris = $query->fetchAll();
