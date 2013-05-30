@@ -7,17 +7,18 @@ class Category {
     //PDO
     private $pdo;
     
-    public static function getIstanza($pdo) {
+    public static function getIstanza($id,$pdo) {
       if(self::$istanza == null)
-        self::$istanza = new self($pdo);
+        self::$istanza = new self($id,$pdo);
       
       return self::$istanza;
     }
     
-    private function __construct($pdo) {
+    private function __construct($id,$pdo) {
         try {
-            if(!empty($pdo)) {
+            if(!empty($pdo) && !empty($id)) {
                 $this->pdo = $pdo;
+                $this->id = $id;
             }
             else
                 throw new Exception("Errore nell'istanziamento delle categorie.", 1);
@@ -29,8 +30,8 @@ class Category {
     }
 
     public function getAllCategory() {
-        $query = $this->pdo->prepare("SELECT id,label,descr FROM link_category ORDER BY label");
-        $query->execute();
+        $query = $this->pdo->prepare("SELECT id,label,descr FROM link_category WHERE user = :user ORDER BY label");
+        $query->execute(array(':user' => $this->id));
         if($query->rowCount() > 0) {
             $ris = $query->fetchAll();
             return $ris;
@@ -40,8 +41,8 @@ class Category {
     }
     
     public function getCategoryById($id) {
-        $query = $this->pdo->prepare("SELECT id,label,descr FROM link_category WHERE id = :id");
-        $query->execute(array(':id' => $id));
+        $query = $this->pdo->prepare("SELECT id,label,descr FROM link_category WHERE id = :id AND user = :user");
+        $query->execute(array(':id' => $id, ':user' => $this->id));
         if($query->rowCount() > 0) {
             $ris = $query->fetchAll();
             return $ris;
@@ -51,8 +52,8 @@ class Category {
     }
     
     public function getCategoryByLabel($label) {
-        $query = $this->pdo->prepare("SELECT id,label,descr FROM link_category WHERE label = :label");
-        $query->execute(array(':label' => $label));
+        $query = $this->pdo->prepare("SELECT id,label,descr FROM link_category WHERE label = :label AND user = :user");
+        $query->execute(array(':label' => $label,':user' => $this->id));
         if($query->rowCount() > 0) {
             $ris = $query->fetchAll();
             return $ris;
@@ -67,10 +68,11 @@ class Category {
             $label = htmlspecialchars(trim($label));
             $descr = htmlspecialchars(trim($descr));
             
-            $query = $this->pdo->prepare("INSERT INTO link_category(label,descr) VALUES(:label,:descr)");
+            $query = $this->pdo->prepare("INSERT INTO link_category(label,descr,user) VALUES(:label,:descr,:user)");
         
             $ris = $query->execute(array(':label' => $label,
-                                         ':descr' => $descr
+                                         ':descr' => $descr,
+                                         ':user' => $this->id
                                         )
                                   );
             return $ris;
