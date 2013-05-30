@@ -1,10 +1,6 @@
-LEFW
-====
-
-Links Every Fuckin' Where
--------------------------
-
-I need to save my links every fuckin' where, every day, every where.
+LEFW - Links Every Fuckin' Where
+================================
+I need to save my links every fuckin' where, every day.
 If I'm at university or if I'm at work and I need to save important, funny, interesting or temporary links I have a place to do it.
 LEFW it's a simple website to save links.
 
