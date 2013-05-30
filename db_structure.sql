@@ -7,8 +7,6 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
--- --------------------------------------------------------
-
 --
 -- Struttura della tabella `link_category`
 --
@@ -38,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `link_link` (
   KEY `user` (`user`),
   KEY `category` (`category`),
   KEY `priv8` (`priv8`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=102 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=121 ;
 
 -- --------------------------------------------------------
 
@@ -52,8 +50,6 @@ CREATE TABLE IF NOT EXISTS `link_profile` (
   `password` varchar(255) NOT NULL,
   `nome` varchar(100) DEFAULT NULL,
   `cognome` varchar(100) DEFAULT NULL,
-  `pic` varchar(255) DEFAULT NULL,
-  `bio` text,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nick` (`nick`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COMMENT='La tabella per la gestione profilo' AUTO_INCREMENT=2 ;
