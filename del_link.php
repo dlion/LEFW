@@ -1,13 +1,6 @@
 <?php
 //Configuration
 include_once('core/config.php');
-//Link Class
-include_once('core/link.class.php');
-//Category Class
-include_once('core/category.class.php');
-
-//Link Istance
-$link = Link::getIstanza($user->getId(),$db);
 
 if(isset($_POST['link']) && isset($_SESSION['saveme']) && $_SESSION['saveme'] === 'ok')
 {
@@ -20,28 +13,6 @@ if(isset($_POST['link']) && isset($_SESSION['saveme']) && $_SESSION['saveme'] ==
         //Insuccess
     }    
 }
-
-
-//User Information
-$io = array (   
-        "id" => $user->getId(),
-        "nome" => $user->getName(),
-        "cognome" => $user->getSurname(),
-        "nick" => $user->getNick(),
-        "pic" => $user->getPic(),
-        "bio" => $user->getBio()
-    );
-
-/*
-Ora ho creato la classe delle categorie così da suddividere i link in categorie
-Bisogna ancora aggiungere metodi per togliere le categorie
-                          metodi per togliere link
-                          motodi per cambiare la password
-                          implementare la criptazione della password
-                          metodi per modificare i link
-                          metodi per modificare le categorie
-                          
-*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -51,24 +22,24 @@ Bisogna ancora aggiungere metodi per togliere le categorie
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	    <link rel="stylesheet" type="text/css" href="css/kube.min.css" />
-	    <link rel="stylesheet" type="text/css" href="css/master.css" />
+        <link rel="stylesheet" type="text/css" href="css/kube.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/master.css" />
         <link href='http://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
     </head>
     <body>
         <div class="wrapper">
             <header id="header" class="group">
-		        <h1><?php echo htmlspecialchars($conf->getNameSite()." - ".$io['nick']); ?></h1>
+                <h1><?php echo htmlspecialchars($conf->getNameSite()." - ".$io['nick']); ?></h1>
                 <nav class="nav-tabs">
                     <ul>
-    					<li><a href="index.php">Public Link</a></li>
+                        <li><a href="index.php">Public Link</a></li>
                         <li><a href="priv_link.php">Private Link</a></li>
-    					<li><a href="add_link.php">Add Link</a></li>
+                        <li><a href="add_link.php">Add Link</a></li>
                         <li><span>Del Link</span></li>
                         <li><a href="mod_link.php">Modify Link</a></li>
-				    </ul>
-			    </nav>
-	        </header>
+                    </ul>
+                </nav>
+            </header>
             <hr>
 <?php
 if(isset($_POST['pass']) && $user->checkMyPass($_POST['pass']) === true ||  isset($_SESSION['saveme']) && $_SESSION['saveme'] === 'ok')
@@ -81,14 +52,12 @@ if(isset($_POST['pass']) && $user->checkMyPass($_POST['pass']) === true ||  isse
                 <fieldset>
                     <ul>
                         <li>
-                            <label for="link" class="bold">Links</label>
+                            <label for="link" class="bold">Del Link</label>
                             <select class="width-33" name="link" id="link">
                                 <option>Choose Link</option>
-                                <?php if($all_link !== false){
-                                foreach($all_link as $link_del){ ?>
+                                <?php foreach($all_link as $link_del){ ?>
                                 <option name="link" value="<?php echo $link_del['id'];?>"><?php echo $link_del['name'];?></option>
-                                <?php }
-                                }?>
+                                <?php }?>
                             </select>
                         </li>
                         <li class="push">
