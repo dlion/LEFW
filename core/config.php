@@ -8,9 +8,9 @@ include_once('db.class.php');
 //User Class
 include_once('user.class.php');
 //Link Class
-include_once('core/link.class.php');
+include_once('link.class.php');
 //Category Class
-include_once('core/category.class.php');
+include_once('category.class.php');
 
 /*
  * -- Configuration --
