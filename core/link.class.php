@@ -102,116 +102,153 @@ class Link {
     
     //Check if url is a true url
     public function checkURL($url) {
-        $reg = '%^(?:(?:https?|ftp)://)(?:\S+(?::\S*)?@|\d{1,3}(?:\.\d{1,3}){3}|(?:(?:[a-z\d\x{00a1}-\x{ffff}]+-?)*[a-z\d\x{00a1}-\x{ffff}]+)(?:\.(?:[a-z\d\x{00a1}-\x{ffff}]+-?)*[a-z\d\x{00a1}-\x{ffff}]+)*(?:\.[a-z\x{00a1}-\x{ffff}]{2,6}))(?::\d+)?(?:[^\s]*)?$%iu';
-        
-        $url = htmlspecialchars(trim($url));
-        
-        if(preg_match($reg,$url))
-            return true;
-        else
-        {
-            $url = "http://".$url;
-            
-            return (preg_match($reg,$url)) ? true : false;
-        }
+        return preg_match("#\b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/)))#im",$url);
     }
     
     //Insert a link with category
     public function insertLink($name,$url,$category,$priv) {
+        try {
+            $check = $this->checkURL($url);
+            if($check === 1)
+            {
+                $name = htmlspecialchars(trim($name));
+                $url = htmlspecialchars(trim($url));
+                $category = htmlspecialchars(trim($category));
+                $priv = htmlspecialchars(trim($priv));
         
-        if($this->checkURL($url) === true)
-        {
-            $url = htmlspecialchars(trim($url));
-            $name = htmlspecialchars(trim($name));
-            $category = htmlspecialchars(trim($category));
-            $priv = htmlspecialchars(trim($priv));
+                $query = $this->pdo->prepare("INSERT INTO link_link(name,url,user,priv8,category) VALUES(:name,:url,:user,:priv,:category)");
         
-            $query = $this->pdo->prepare("INSERT INTO link_link(name,url,user,priv8,category) VALUES(:name,:url,:user,:priv,:category)");
-        
-            $query->execute(array(':name' => $name,
-                                        ':url' => $url,
-                                        ':user' => $this->id,
-                                        ':priv' => $priv,
-                                        ':category' => $category
-                                        )
-                                    );
+                $query->execute(array(':name' => $name,
+                                      ':url' => $url,
+                                      ':user' => $this->id,
+                                      ':priv' => $priv,
+                                      ':category' => $category
+                                      )
+                                );
                                     
-            return ($query->rowCount() > 0) ? true : false;
+                if($query->rowCount() > 0)
+                    return true;
+                else
+                    throw new Exception("Query Error!");
+            }
+            elseif($check === 0)
+                throw new Exception("Insert a valid link!");
+                
+            else
+                throw new Exception("Impossible insert a link!");
+        }catch(Exception $e) {
+            die($e->getMessage());
         }
-        else
-            return false;
     }
     
     //Delete link
     public function deleteLink($id) {
-        $id = htmlspecialchars(trim($id));
+        try {
+            $id = htmlspecialchars(trim($id));
         
-        $query = $this->pdo->prepare("DELETE FROM link_link WHERE id = :id AND user = :user");
-        $ris = $query->execute(array(':id' => $id,
-                                     ':user' => $this->id
-                                    )
-                                );
+            $query = $this->pdo->prepare("DELETE FROM link_link WHERE id = :id AND user = :user");
+            $ris = $query->execute(array(':id' => $id,
+                                         ':user' => $this->id
+                                        )
+                                    );
                         
-        return ($query->rowCount() > 0) ? true : false;
+            if($query->rowCount() > 0)
+                return true;
+            else
+                throw new Exception("Query Error!");
+        }catch(Exception $e) {
+            die($e->getMessage());
+        }
     }
     
     //Modify Name Link
     public function updateNameLink($id,$name) {
-        $id = htmlspecialchars(trim($id));
-        $name = htmlspecialchars(trim($name));
-        
-        $query = $this->pdo->prepare("UPDATE link_link SET name = :name WHERE id = :id AND user = :user");
-        $query->execute(array(':name' => $name,
-                              ':id' => $id,
-                              ':user' => $this->id
-                            )
-                        );
-        return ($query->rowCount() > 0) ? true : false;
-    }
-    
-    //Modify Url Link
-    public function updateUrlLink($id,$url) {
-        if($this->checkURL($url) === true)
-        {
-            $url = htmlspecialchars(trim($url));
+        try {
             $id = htmlspecialchars(trim($id));
+            $name = htmlspecialchars(trim($name));
             
-            $query = $this->pdo->prepare("UPDATE link_link SET url = :url WHERE id = :id AND user = :user");
-            $query->execute(array(':url' => $url,
+            $query = $this->pdo->prepare("UPDATE link_link SET name = :name WHERE id = :id AND user = :user");
+            $query->execute(array(':name' => $name,
                                   ':id' => $id,
                                   ':user' => $this->id
                                 )
                             );
-            return ($query->rowCount() > 0) ? true : false;
+            if($query->rowCount() > 0)
+                return true;
+            else
+                throw new Exception("Query Error!");
+        }catch(Exception $e) {
+            die($e->getMessage());
         }
-        else
-            return false;
+    }
+    
+    //Modify Url Link
+    public function updateUrlLink($id,$url) {
+        try {
+            $check = $this->checkURL($url);
+            if($check === 1)
+            {
+                $url = htmlspecialchars(trim($url));
+                $id = htmlspecialchars(trim($id));
+            
+                $query = $this->pdo->prepare("UPDATE link_link SET url = :url WHERE id = :id AND user = :user");
+                $query->execute(array(':url' => $url,
+                                      ':id' => $id,
+                                      ':user' => $this->id
+                                    )
+                                );
+                if($query->rowCount() > 0)
+                    return true;
+                else
+                    throw new Exception("Query Error!");
+            }
+            elseif($check === 0)
+                throw new Exception("Insert a valid link!");
+            else
+                throw new Exception("Impossible update a link!");
+        }catch(Exception $e) {
+            die($e->getMessage());
+        }
     }
     
     public function updateCategoryLink($id,$category) {
-        $id = htmlspecialchars(trim($id));
-        $category = htmlspecialchars(trim($category));
+        try {
+            $id = htmlspecialchars(trim($id));
+            $category = htmlspecialchars(trim($category));
         
-        $query = $this->pdo->prepare("UPDATE link_link SET category = :category WHERE id = :id AND user = :user");
-        $query->execute(array(':category' => $category,
-                              ':id' => $id,
-                              ':user' => $this->id
-                            )
-                        );
-        return ($query->rowCount() > 0) ? true : false;
+            $query = $this->pdo->prepare("UPDATE link_link SET category = :category WHERE id = :id AND user = :user");
+            $query->execute(array(':category' => $category,
+                                  ':id' => $id,
+                                  ':user' => $this->id
+                                )
+                            );
+            if($query->rowCount() > 0)
+                return true;
+            else
+                throw new Exception("Query Error!");
+        }catch(Exception $e) {
+            die($e->getMessage());
+        }
     }
 
     public function updatePriv8Link($id,$priv8) {
-        $id = htmlspecialchars(trim($id));
-        $priv8 = htmlspecialchars(trim(priv8));
+        try {
+            $id = htmlspecialchars(trim($id));
+            $priv8 = htmlspecialchars(trim(priv8));
 
-        $query = $this->pdo->prepare("UPDATE link_link SET priv8 = :priv8 WHERE id = :id AND user = :user");
-        $query->execute(array(':priv8' => $priv8,
-                              ':id' => $id,
-                              ':user' => $this->id
-                              )
-                        );
-        return ($query->rowCount() > 0) ? true : false;
+            $query = $this->pdo->prepare("UPDATE link_link SET priv8 = :priv8 WHERE id = :id AND user = :user");
+            $query->execute(array(':priv8' => $priv8,
+                                  ':id' => $id,
+                                  ':user' => $this->id
+                                  )
+                            );
+            if($query->rowCount() > 0)
+                return true;
+            else
+                throw new Exception("Query Error!");
+        }catch(Exception $e) {
+            die($e->getMessage());
+        }
     }
 }
 ?>
