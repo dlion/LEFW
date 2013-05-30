@@ -28,6 +28,17 @@ class Link {
             die($e->getMessage());
         }
     }
+
+    public function getLinkById($link) {
+        $query = $this->pdo->prepare("SELECT id,name,url,category,priv8 FROM link_link WHERE user = :id AND id = :link");
+        $query->execute(array(':id' => $this->id, ':link' => $link));
+        if($query->rowCount() > 0) {
+            $ris = $query->fetchAll();
+            return $ris;
+        }
+        else
+            return false;
+    }
     
     //Return public links by a category and user
     public function getPublicLinkByCategory($category) {
@@ -145,7 +156,7 @@ class Link {
     }
     
     //Modify Name Link
-    public function modifyNameLink($id,$name) {
+    public function updateNameLink($id,$name) {
         $id = htmlspecialchars(trim($id));
         $name = htmlspecialchars(trim($name));
         
@@ -159,7 +170,7 @@ class Link {
     }
     
     //Modify Url Link
-    public function modifyUrlLink($id,$url) {
+    public function updateUrlLink($id,$url) {
         if($this->checkURL($url) === true)
         {
             $url = htmlspecialchars(trim($url));
@@ -177,7 +188,7 @@ class Link {
             return false;
     }
     
-    public function modifyCategoryLink($id,$category) {
+    public function updateCategoryLink($id,$category) {
         $id = htmlspecialchars(trim($id));
         $category = htmlspecialchars(trim($category));
         
@@ -186,6 +197,19 @@ class Link {
                               ':id' => $id,
                               ':user' => $this->id
                             )
+                        );
+        return ($query->rowCount() > 0) ? true : false;
+    }
+
+    public function updatePriv8Link($id,$priv8) {
+        $id = htmlspecialchars(trim($id));
+        $priv8 = htmlspecialchars(trim(priv8));
+
+        $query = $this->pdo->prepare("UPDATE link_link SET priv8 = :priv8 WHERE id = :id AND user = :user");
+        $query->execute(array(':priv8' => $priv8,
+                              ':id' => $id,
+                              ':user' => $this->id
+                              )
                         );
         return ($query->rowCount() > 0) ? true : false;
     }
