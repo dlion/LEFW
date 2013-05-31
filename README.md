@@ -32,7 +32,7 @@ Let Me See
 [Link Every Fuckin' Where on my server] (http://link.dlion.it)
 
 
-Who Are This Stupid Fuckin' Developer ?
+Who Is This Stupid Fuckin' Developer ?
 ---------------------------------------
 Thinking and developed by [DLion] (http://dlion.it)
 
