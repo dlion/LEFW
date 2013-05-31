@@ -7,6 +7,8 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
+-- --------------------------------------------------------
+
 --
 -- Struttura della tabella `link_category`
 --
@@ -15,8 +17,10 @@ CREATE TABLE IF NOT EXISTS `link_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `label` varchar(100) NOT NULL,
   `descr` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+  `user` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user` (`user`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -32,11 +36,11 @@ CREATE TABLE IF NOT EXISTS `link_link` (
   `priv8` int(1) NOT NULL DEFAULT '0',
   `user` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `url` (`url`),
   KEY `user` (`user`),
   KEY `category` (`category`),
-  KEY `priv8` (`priv8`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=121 ;
+  KEY `priv8` (`priv8`),
+  KEY `url` (`url`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -52,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `link_profile` (
   `cognome` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nick` (`nick`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COMMENT='La tabella per la gestione profilo' AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
