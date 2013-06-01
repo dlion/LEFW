@@ -61,9 +61,11 @@ if(isset($_POST['pass']) && $user->checkMyPass($_POST['pass']) === true ||  isse
                             <label for="category" class="bold">Category</label>
                             <select class="width-33" name="category" id="category">
                                 <option>Choose category</option>
-                                <?php foreach($categoria as $cat){ ?>
+                                <?php foreach($categoria as $cat){
+                                        if($cat['label'] != "General"){?>
                                 <option name="category" value="<?php echo $cat['id'];?>"><?php echo $cat['label'];?></option>
-                                <?php } ?>
+                                <?php }
+                                    } ?>
                             </select>
                         </li>
                         <li>

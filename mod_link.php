@@ -100,8 +100,9 @@ if(isset($_POST['pass']) && $user->checkMyPass($_POST['pass']) === true ||  isse
                             <label for="link" class="bold">Modify Link</label>
                             <select class="width-33" name="link" id="link">
                                 <option>Choose Link</option>
-                                <?php foreach($all_link as $link_del){ ?>
-                                <option name="link" value="<?php echo $link_del['id'];?>"><?php echo $link_del['name'];?></option>
+                                <?php foreach($all_link as $link_del){ 
+                                        $where_cat = $category->getCategoryById($link_del['category']);?>
+                                <option name="link" value="<?php echo $link_del['id'];?>"><?php echo $link_del['name']." --------- ".$where_cat[0]['label'];?></option>
                                 <?php }?>
                             </select>
                         </li>
