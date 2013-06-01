@@ -13,26 +13,26 @@ $i=0;
         <title><?php echo htmlspecialchars($conf->getNameSite()." - ".$io['nick']); ?></title>
 
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="stylesheet" type="text/css" href="css/kube.min.css" />
-        <link rel="stylesheet" type="text/css" href="css/master.css" />
+	    <link rel="stylesheet" type="text/css" href="css/kube.min.css" />
+	    <link rel="stylesheet" type="text/css" href="css/master.css" />
         <link href='http://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
     </head>
     <body>
         <div class="wrapper">
             <header id="header" class="group">
-                <h1><?php echo htmlspecialchars($conf->getNameSite()." - ".$io['nick']); ?></h1>
+		        <h1><?php echo htmlspecialchars($conf->getNameSite()." - ".$io['nick']); ?></h1>
                 <nav class="nav-tabs">
                     <ul>
-                        <li><a href='index.php'>Public Link</a></li>
+    					<li><a href='index.php'>Public Link</a></li>
                         <li><span>Private Link</span></li>
-                        <li><a href="add_link.php">Add Link</a></li>
+        				<li><a href="add_link.php">Add Link</a></li>
                         <li><a href="del_link.php">Del Link</a></li>
                         <li><a href="mod_link.php">Modify Link</a></li>
-                    </ul>
-                </nav>
-            </header>
+				    </ul>
+			    </nav>
+	        </header>
             <hr>
 <?php
 if(isset($_POST['pass']) && $user->checkMyPass($_POST['pass']) === true ||  isset($_SESSION['saveme']) && $_SESSION['saveme'] === 'ok')
@@ -111,5 +111,16 @@ else
 <?php    
 }?>
         </div>
+        <footer id="footer">
+            <ul id='manage_category'>
+                <li><a href='add_category.php'>Add Category</a></li>
+                <li><a href='del_category.php'>Del Category</a></li>
+                <li><a href='mod_category.php'>Modify Category</a></li>
+            </ul>
+            <ul id='about'>
+                <li><a href='http://github.com/DLion/LEFW/'>ForkMe</a></li>
+                <li><a href='http://dlion.it'>DLion</li>
+            </ul>
+        </footer>
     </body>
 </html>

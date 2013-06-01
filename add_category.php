@@ -3,12 +3,8 @@
 include_once('core/config.php');
 
 //If password is set or if I have session
-if(isset($_POST['name']) && isset($_POST['url']) && isset($_POST['category']) && isset($_SESSION['saveme']) && $_SESSION['saveme'] == 'ok' ) {
-    //If session is set and right or if is set a pass and pass is true
-    $priv = (!isset($_POST['priv'])) ? 0 : 1;
-            
-    $link->insertLink($_POST['name'],$_POST['url'],$_POST['category'],$priv);    
-}
+if(isset($_POST['name']) && isset($_POST['descr']) && isset($_SESSION['saveme']) && $_SESSION['saveme'] == 'ok' ) 
+    $category->insertCategory($_POST['name'],$_POST['descr']);    
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,11 +24,9 @@ if(isset($_POST['name']) && isset($_POST['url']) && isset($_POST['category']) &&
 		        <h1><?php echo htmlspecialchars($conf->getNameSite()." - ".$io['nick']); ?></h1>
                 <nav class="nav-tabs">
                     <ul>
-    					<li><a href='index.php'>Public Link</a></li>
-                        <li><a href="priv_link.php">Private Link</a></li>
-    					<li><span>Add Link</span></li>
-                        <li><a href="del_link.php">Del Link</a></li>
-                        <li><a href="mod_link.php">Modify Link</a></li>
+    					<li><span>Add Category</span></li>
+                        <li><a href='del_category.php'>Del Category</a></li>
+                        <li><a href='mod_category.php'>Modify Category</a></li>
 				    </ul>
 			    </nav>
 	        </header>
@@ -42,9 +36,6 @@ if(isset($_POST['pass']) && $user->checkMyPass($_POST['pass']) === true ||  isse
 {
     if(!isset($_SESSION['saveme']))
         $_SESSION['saveme'] = 'ok';
-        
-        //Prendo tutte le categorie
-        $categoria = $category->getAllCategory();
         ?>
             <form method="post" action="" class="forms columnar">
                 <fieldset>
@@ -54,21 +45,8 @@ if(isset($_POST['pass']) && $user->checkMyPass($_POST['pass']) === true ||  isse
                             <input type="text" name="name" id="name" size="40" />
                         </li>
                         <li>
-                            <label for="url" class="bold">Url</label>
-                            <input type="text" name="url" id="url" size="40" />
-                        </li>
-                        <li>
-                            <label for="category" class="bold">Category</label>
-                            <select class="width-33" name="category" id="category">
-                                <option>Choose category</option>
-                                <?php foreach($categoria as $cat){ ?>
-                                <option name="category" value="<?php echo $cat['id'];?>"><?php echo $cat['label'];?></option>
-                                <?php } ?>
-                            </select>
-                        </li>
-                        <li>
-                            <label for="priv" class="bold">Private</label>
-                            <input type="checkbox" name="priv" id="priv" value='1'/>
+                            <label for="descr" class="bold">Description</label>
+                            <input type="text" name="descr" id="descr" size="40" />
                         </li>
                         <li class="push">
                             <input type="submit" name="send" class="btn" value="Submit" />
@@ -98,9 +76,11 @@ else
         
         <footer id="footer">
             <ul id='manage_category'>
-                <li><a href='add_category.php'>Add Category</a></li>
-                <li><a href='del_category.php'>Del Category</a></li>
-                <li><a href='mod_category.php'>Modify Category</a></li>
+                <li><a href='index.php'>Public Link</a></li>
+                <li><a href="priv_link.php">Private Link</a></li>
+                <li><a href="add_link.php">Add Link</a></li>
+                <li><a href="del_link.php">Del Link</a></li>
+                <li><a href="mod_link.php">Modify Link</a></li>
             </ul>
             <ul id='about'>
                 <li><a href='http://github.com/DLion/LEFW/'>ForkMe</a></li>

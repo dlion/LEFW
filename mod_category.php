@@ -2,14 +2,11 @@
 //Configuration
 include_once('core/config.php');
 
-if(isset($_POST['name']) && isset($_POST['url']) && isset($_POST['category']) && isset($_POST['link_id']) && isset($_SESSION['saveme']) && $_SESSION['saveme'] == 'ok' ) {
+if(isset($_POST['name']) && isset($_POST['descr']) && isset($_POST['category_id']) && isset($_SESSION['saveme']) && $_SESSION['saveme'] == 'ok' ) {
     //If session is set and right or if is set a pass and pass is true
-    $priv = (!isset($_POST['priv'])) ? 0 : 1;
-    $dest = $_POST['link_id'];
-    $link->updateNameLink($dest,$_POST['name']);
-    $link->updateUrlLink($dest,$_POST['url']);
-    $link->updateCategoryLink($dest,$_POST['category']);
-    $link->updatePriv8Link($dest,$priv);
+    $dest = $_POST['category_id'];
+    $category->updateNameCategory($dest,$_POST['name']);
+    $category->updateDescrCategory($dest,$_POST['descr']);
 }
 ?>
 <!DOCTYPE html>
@@ -30,11 +27,9 @@ if(isset($_POST['name']) && isset($_POST['url']) && isset($_POST['category']) &&
 		        <h1><?php echo htmlspecialchars($conf->getNameSite()." - ".$io['nick']); ?></h1>
                 <nav class="nav-tabs">
                     <ul>
-    					<li><a href='index.php'>Public Link</a></li>
-                        <li><a href="priv_link.php">Private Link</a></li>
-    					<li><a href="add_link.php">Add Link</a></li>
-                        <li><a href="del_link.php">Del Link</a></li>
-                        <li><span>Modify Link</span></li>
+    					<li><a href='add_category.php'>Add Category</a></li>
+                        <li><a href='del_category.php'>Del Category</a></li>
+                        <li><span>Modify Category</span></li>
 				    </ul>
 			    </nav>
 	        </header>
@@ -46,14 +41,11 @@ if(isset($_POST['pass']) && $user->checkMyPass($_POST['pass']) === true ||  isse
         $_SESSION['saveme'] = 'ok';
     
     //If choose a link to modify
-    if(isset($_POST['link']) && $link->getLinkById($_POST['link']) !== false) {
-        $categoria = $category->getAllCategory();
-        foreach ($link->getLinkById($_POST['link']) as $dati) {
-            $id_link = $dati['id'];
-            $nome = $dati['name'];
-            $url = $dati['url'];
-            $cate = $dati['category'];
-            $priv8 = $dati['priv8'];
+    if(isset($_POST['category']) && $category->getCategoryById($_POST['category']) !== false) {
+        foreach ($category->getCategoryById($_POST['category']) as $dati) {
+            $id_category = $dati['id'];
+            $nome = $dati['label'];
+            $descr = $dati['descr'];
         }?>
             <form method="post" action="" class="forms columnar">
                 <fieldset>
@@ -63,26 +55,11 @@ if(isset($_POST['pass']) && $user->checkMyPass($_POST['pass']) === true ||  isse
                             <input type="text" name="name" id="name" size="40" value="<?php echo $nome;?>" />
                         </li>
                         <li>
-                            <label for="url" class="bold">Url</label>
-                            <input type="text" name="url" id="url" size="40" value="<?php echo $url;?>" />
-                        </li>
-                        <li>
-                            <label for="category" class="bold">Category</label>
-                            <select class="width-33" name="category" id="category">
-                                <option>Choose category</option>
-                                <?php foreach($categoria as $cat){ 
-                                        if($cat['label'] != "General"){?>
-                                <option name="category" value="<?php echo $cat['id'];?>" <?php echo ($cat['id'] == $cate) ? "selected" : "";?>><?php echo $cat['label'];?></option>
-                                <?php } 
-                                    }?>
-                            </select>
-                        </li>
-                        <li>
-                            <label for="priv" class="bold">Private</label>
-                            <input type="checkbox" name="priv" id="priv" value='1' <?php echo ($priv8 == 1) ? "checked" : "";?>/>
+                            <label for="descr" class="bold">Description</label>
+                            <input type="text" name="descr" id="descr" size="40" value="<?php echo $descr;?>" />
                         </li>
                         <li class="push">
-                            <input type="hidden" name="link_id" value="<?php echo $id_link;?>"/>
+                            <input type="hidden" name="category_id" value="<?php echo $id_category;?>"/>
                             <input type="submit" name="send" class="btn" value="Submit" />
                         </li>
                     </ul>
@@ -92,17 +69,19 @@ if(isset($_POST['pass']) && $user->checkMyPass($_POST['pass']) === true ||  isse
     }
     else
     {
-        $all_link = $link->getAllLink();?>
+        $categoria = $category->getAllCategory();?>
             <form method="post" action="" class="forms columnar">
                 <fieldset>
                     <ul>
                         <li>
-                            <label for="link" class="bold">Modify Link</label>
-                            <select class="width-33" name="link" id="link">
-                                <option>Choose Link</option>
-                                <?php foreach($all_link as $link_del){ ?>
-                                <option name="link" value="<?php echo $link_del['id'];?>"><?php echo $link_del['name'];?></option>
-                                <?php }?>
+                            <label for="category" class="bold">Modify Category</label>
+                            <select class="width-33" name="category" id="category">
+                                <option>Choose Category</option>
+                                <?php foreach($categoria as $cat){ 
+                                        if($cat['label'] != "General"){?>?>
+                                <option name="category" value="<?php echo $cat['id'];?>"><?php echo $cat['label'];?></option>
+                                <?php } 
+                                }?>
                             </select>
                         </li>
                         <li class="push">
@@ -133,9 +112,11 @@ else
 }?>
             <footer id="footer">
                 <ul id='manage_category'>
-                    <li><a href='add_category.php'>Add Category</a></li>
-                    <li><a href='del_category.php'>Del Category</a></li>
-                    <li><a href='mod_category.php'>Modify Category</a></li>
+                    <li><a href='index.php'>Public Link</a></li>
+                    <li><a href="priv_link.php">Private Link</a></li>
+                    <li><a href="add_link.php">Add Link</a></li>
+                    <li><a href="del_link.php">Del Link</a></li>
+                    <li><a href="mod_link.php">Modify Link</a></li>
                 </ul>
                 <ul id='about'>
                     <li><a href='http://github.com/DLion/LEFW/'>ForkMe</a></li>

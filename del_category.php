@@ -2,8 +2,10 @@
 //Configuration
 include_once('core/config.php');
 
-if(isset($_POST['link']) && isset($_SESSION['saveme']) && $_SESSION['saveme'] === 'ok')
-    $link->deleteLink($_POST['link']);
+if(isset($_POST['category']) && isset($_SESSION['saveme']) && $_SESSION['saveme'] === 'ok') {
+    $erase = (!isset($_POST['erase'])) ? 0 : 1;
+    $category->deleteCategory($_POST['category'],$erase);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,12 +25,10 @@ if(isset($_POST['link']) && isset($_SESSION['saveme']) && $_SESSION['saveme'] ==
 		        <h1><?php echo htmlspecialchars($conf->getNameSite()." - ".$io['nick']); ?></h1>
                 <nav class="nav-tabs">
                     <ul>
-    					<li><a href="index.php">Public Link</a></li>
-                        <li><a href="priv_link.php">Private Link</a></li>
-    					<li><a href="add_link.php">Add Link</a></li>
-                        <li><span>Del Link</span></li>
-                        <li><a href="mod_link.php">Modify Link</a></li>
-				    </ul>
+                        <li><a href='add_category.php'>Add Category</a></li>
+                        <li><span>Del Category</span></li>
+                        <li><a href='mod_category.php'>Modify Category</a></li>
+                    </ul>
 			    </nav>
 	        </header>
             <hr>
@@ -38,18 +38,25 @@ if(isset($_POST['pass']) && $user->checkMyPass($_POST['pass']) === true ||  isse
     if(!isset($_SESSION['saveme']))
         $_SESSION['saveme'] = 'ok';
     
-    $all_link = $link->getAllLink();?>
+    //Prendo tutte le categorie
+        $categoria = $category->getAllCategory();?>
             <form method="post" action="" class="forms columnar">
                 <fieldset>
                     <ul>
                         <li>
-                            <label for="link" class="bold">Del Link</label>
-                            <select class="width-33" name="link" id="link">
-                                <option>Choose Link</option>
-                                <?php foreach($all_link as $link_del){ ?>
-                                <option name="link" value="<?php echo $link_del['id'];?>"><?php echo $link_del['name'];?></option>
-                                <?php }?>
+                            <label for="category" class="bold">Del Category</label>
+                            <select class="width-33" name="category" id="category">
+                                <option>Choose Category</option>
+                                <?php foreach($categoria as $cat){
+                                        if($cat['label'] != "General"){?>
+                                <option name="category" value="<?php echo $cat['id'];?>"><?php echo $cat['label'];?></option>
+                                <?php } 
+                                    } ?>
                             </select>
+                        </li>
+                        <li>
+                            <label for="erase" class="bold">Erase links</label>
+                            <input type="checkbox" name="erase" id="erase" value='1'/>
                         </li>
                         <li class="push">
                             <input type="submit" name="send" class="btn" value="Delete" />
@@ -78,9 +85,11 @@ else
 }?>
             <footer id="footer">
                 <ul id='manage_category'>
-                    <li><a href='add_category.php'>Add Category</a></li>
-                    <li><a href='del_category.php'>Del Category</a></li>
-                    <li><a href='mod_category.php'>Modify Category</a></li>
+                    <li><a href='index.php'>Public Link</a></li>
+                    <li><a href="priv_link.php">Private Link</a></li>
+                    <li><a href="add_link.php">Add Link</a></li>
+                    <li><a href="del_link.php">Del Link</a></li>
+                    <li><a href="mod_link.php">Modify Link</a></li>
                 </ul>
                 <ul id='about'>
                     <li><a href='http://github.com/DLion/LEFW/'>ForkMe</a></li>

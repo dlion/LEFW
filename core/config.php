@@ -20,6 +20,7 @@ include_once('category.class.php');
  * - @password - Password to use database
  * - @admin - Nickname of admin
  */
+
 $conf = Config::getIstanza('@host','@database','@user','@password','@admin');
 
 // DB and PDO istances
@@ -33,14 +34,13 @@ $io = array (
         "id" => $user->getId(),
         "nome" => $user->getName(),
         "cognome" => $user->getSurname(),
-        "nick" => $user->getNick(),
-        "pic" => $user->getPic(),
-        "bio" => $user->getBio()
+        "nick" => $user->getNick()
     );
 
 //Link Istance
 $link = Link::getIstanza($user->getId(),$db);
 
 //Category Istance
-$category = Category::getIstanza($db);
+$category = Category::getIstanza($user->getId(),$db);
 ?>
+

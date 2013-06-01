@@ -19,6 +19,7 @@ How Can Install It ?
 * If you want to tray LEFW first of all you have to create a db structure. *You can find `db_structure.sql` file to do it*
 * After of it you have to modify the `core/config.php` file adding your `hostname`, `database name`, `database password` and your *`nick`*.
 * *In this moment you have to add your user manually in the database*, put your `name`, `surname`,`nick` ( *the same of nick in the config.php file* ) and a `pass` on the db so you can add, delete and modify links.
+* *In this moment you have to add General category manually in the database, put as `label` 'General' and `description` is free, remember `General` as `label`.
 * *In this moment you have to add your categories manually in the database*, put a `label` and a `description`.
 
 Soon
