@@ -204,7 +204,7 @@ class Link {
 
     public function updatePriv8Link($id,$priv8) {
         $id = htmlspecialchars(trim($id));
-        $priv8 = htmlspecialchars(trim(priv8));
+        $priv8 = htmlspecialchars(trim($priv8));
 
         $query = $this->pdo->prepare("UPDATE link_link SET priv8 = :priv8 WHERE id = :id AND user = :user");
         $query->execute(array(':priv8' => $priv8,
