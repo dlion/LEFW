@@ -20,8 +20,8 @@ if(isset($_POST['name']) && isset($_POST['url']) && isset($_POST['category']) &&
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	    <link rel="stylesheet" type="text/css" href="css/kube.min.css" />
-	    <link rel="stylesheet" type="text/css" href="css/master.css" />
+	    <link rel="stylesheet" type="text/css" href="css/kube/kube.min.css" />
+	    <link rel="stylesheet" type="text/css" href="css/kube/master.css" />
         <link href='http://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
     </head>
     <body>
