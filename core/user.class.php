@@ -4,8 +4,6 @@ class User {
     private $id;
     private $nick;
     private $password;
-    private $name;
-    private $surname;
 
     //Istanza
     private static $istanza = null;
@@ -24,7 +22,7 @@ class User {
             //Salvo il pdo
             $this->pdo = $pdo;
             //Prendo i dati dell'utente
-            $query = $pdo->prepare("SELECT id,nick,password,nome,cognome FROM link_profile WHERE nick = :nick");
+            $query = $pdo->prepare("SELECT id,nick,password FROM link_profile WHERE nick = :nick");
             $query->execute(array(':nick' => $nick));
             
             if($query->rowCount() > 0) {
@@ -33,8 +31,6 @@ class User {
                 $this->id = $ris->id;
                 $this->nick = $ris->nick;
                 $this->password = $ris->password;
-                $this->name = $ris->nome;
-                $this->surname = $ris->cognome;
             }
             else throw new Exception("L'utente cercato non è stato trovato");
         }
@@ -48,14 +44,6 @@ class User {
     }
     public function getNick() {
         return $this->nick;
-    }
-    
-    public function getName() {
-        return $this->name;
-    }
-    
-    public function getSurname() {
-        return $this->surname;
     }
     
     public function checkMyPass($pass) {
