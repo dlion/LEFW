@@ -102,7 +102,7 @@ class Link {
     
     //Check if url is a true url
     public function checkURL($url) {
-        return preg_match("#\b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/)))#im",$url);
+        return preg_match("/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/",$url);
     }
     
     //Insert a link with category
