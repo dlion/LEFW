@@ -2,7 +2,7 @@
 //Configuration
 include_once('core/config.php');
 
-if(isset($_POST['name']) && isset($_POST['url']) && isset($_POST['category']) && isset($_POST['link_id']) && isset($_SESSION['saveme']) && $_SESSION['saveme'] == 'ok' ) {
+if(isset($_POST['name']) && !empty($_POST['name']) && isset($_POST['url']) && !empty($_POST['url']) && isset($_POST['category']) && !empty($_POST['category']) && isset($_POST['link_id']) && !empty($_POST['link_id']) && isset($_SESSION['saveme']) && $_SESSION['saveme'] == 'ok' ) {
     //If session is set and right or if is set a pass and pass is true
     $priv = (!isset($_POST['priv'])) ? 0 : 1;
     $dest = $_POST['link_id'];
@@ -20,24 +20,24 @@ if(isset($_POST['name']) && isset($_POST['url']) && isset($_POST['category']) &&
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	    <link rel="stylesheet" type="text/css" href="css/kube.min.css" />
-	    <link rel="stylesheet" type="text/css" href="css/master.css" />
+        <link rel="stylesheet" type="text/css" href="css/kube.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/master.css" />
         <link href='http://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
     </head>
     <body>
         <div class="wrapper">
             <header id="header" class="group">
-		        <h1><?php echo htmlspecialchars($conf->getNameSite()." - ".$io['nick']); ?></h1>
+                <h1><?php echo htmlspecialchars($conf->getNameSite()." - ".$io['nick']); ?></h1>
                 <nav class="nav-tabs">
                     <ul>
-    					<li><a href='index.php'>Public Link</a></li>
+                        <li><a href='index.php'>Public Link</a></li>
                         <li><a href="priv_link.php">Private Link</a></li>
-    					<li><a href="add_link.php">Add Link</a></li>
+                        <li><a href="add_link.php">Add Link</a></li>
                         <li><a href="del_link.php">Del Link</a></li>
                         <li><span>Modify Link</span></li>
-				    </ul>
-			    </nav>
-	        </header>
+                    </ul>
+                </nav>
+            </header>
             <hr>
 <?php
 if(isset($_POST['pass']) && $user->checkMyPass($_POST['pass']) === true ||  isset($_SESSION['saveme']) && $_SESSION['saveme'] === 'ok')
@@ -69,7 +69,7 @@ if(isset($_POST['pass']) && $user->checkMyPass($_POST['pass']) === true ||  isse
                         <li>
                             <label for="category" class="bold">Category</label>
                             <select class="width-33" name="category" id="category">
-                                <option>Choose category</option>
+                                <option value=''>Choose category</option>
                                 <?php foreach($categoria as $cat){ 
                                         if($cat['label'] != "General"){?>
                                 <option name="category" value="<?php echo $cat['id'];?>" <?php echo ($cat['id'] == $cate) ? "selected" : "";?>><?php echo $cat['label'];?></option>
@@ -99,7 +99,7 @@ if(isset($_POST['pass']) && $user->checkMyPass($_POST['pass']) === true ||  isse
                         <li>
                             <label for="link" class="bold">Modify Link</label>
                             <select class="width-33" name="link" id="link">
-                                <option>Choose Link</option>
+                                <option value=''>Choose Link</option>
                                 <?php foreach($all_link as $link_del){ 
                                         $where_cat = $category->getCategoryById($link_del['category']);?>
                                 <option name="link" value="<?php echo $link_del['id'];?>"><?php echo $link_del['name']." --------- ".$where_cat[0]['label'];?></option>

@@ -2,7 +2,7 @@
 //Configuration
 include_once('core/config.php');
 
-if(isset($_POST['category']) && isset($_SESSION['saveme']) && $_SESSION['saveme'] === 'ok') {
+if(isset($_POST['category']) && !empty($_POST['category']) && isset($_SESSION['saveme']) && $_SESSION['saveme'] === 'ok') {
     $erase = (!isset($_POST['erase'])) ? 0 : 1;
     $category->deleteCategory($_POST['category'],$erase);
 }
@@ -15,22 +15,22 @@ if(isset($_POST['category']) && isset($_SESSION['saveme']) && $_SESSION['saveme'
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	    <link rel="stylesheet" type="text/css" href="css/kube.min.css" />
-	    <link rel="stylesheet" type="text/css" href="css/master.css" />
+        <link rel="stylesheet" type="text/css" href="css/kube.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/master.css" />
         <link href='http://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
     </head>
     <body>
         <div class="wrapper">
             <header id="header" class="group">
-		        <h1><?php echo htmlspecialchars($conf->getNameSite()." - ".$io['nick']); ?></h1>
+                <h1><?php echo htmlspecialchars($conf->getNameSite()." - ".$io['nick']); ?></h1>
                 <nav class="nav-tabs">
                     <ul>
                         <li><a href='add_category.php'>Add Category</a></li>
                         <li><span>Del Category</span></li>
                         <li><a href='mod_category.php'>Modify Category</a></li>
                     </ul>
-			    </nav>
-	        </header>
+                </nav>
+            </header>
             <hr>
 <?php
 if(isset($_POST['pass']) && $user->checkMyPass($_POST['pass']) === true ||  isset($_SESSION['saveme']) && $_SESSION['saveme'] === 'ok')
@@ -46,7 +46,7 @@ if(isset($_POST['pass']) && $user->checkMyPass($_POST['pass']) === true ||  isse
                         <li>
                             <label for="category" class="bold">Del Category</label>
                             <select class="width-33" name="category" id="category">
-                                <option>Choose Category</option>
+                                <option value=''>Choose Category</option>
                                 <?php foreach($categoria as $cat){
                                         if($cat['label'] != "General"){?>
                                 <option name="category" value="<?php echo $cat['id'];?>"><?php echo $cat['label'];?></option>
