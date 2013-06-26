@@ -12,16 +12,7 @@ include_once('link.class.php');
 //Category Class
 include_once('category.class.php');
 
-/*
- * -- Configuration --
- * - @host - Host where is the database
- * - @database - Name of database
- * - @user - User to use database
- * - @password - Password to use database
- * - @admin - Nickname of admin
- */
-
-$conf = Config::getIstanza('@host','@database','@user','@password','@admin');
+$conf = Config::getIstanza('_HOST_','_DB_NAME_','_DB_USER_','_DB_PASS_','_NICK_ADMIN_');
 
 // DB and PDO istances
 $db = Db::getIstanza($conf);
@@ -32,8 +23,6 @@ $user = User::getIstanza($conf->getAdmin(),$db);
 //User Information
 $io = array (   
         "id" => $user->getId(),
-        "nome" => $user->getName(),
-        "cognome" => $user->getSurname(),
         "nick" => $user->getNick()
     );
 
