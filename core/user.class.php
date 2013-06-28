@@ -47,7 +47,8 @@ class User {
     }
     
     public function checkMyPass($pass) {
-        return ($pass === $this->password) ? true : false;
+        $pass = hash("sha256",$pass);
+        return ($pass == $this->password) ? true : false;
     }
 }
 ?>

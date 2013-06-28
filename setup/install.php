@@ -107,10 +107,8 @@ if(isset($_POST['db_host']) && isset($_POST['db_name']) && isset($_POST['db_user
     	<div class="wrapper">
     		<header id="header" class="group">
 		        <h1>LEFW is installed successful - LEFW</h1>
-		        <h1 class="subheader">Now is possibile delete 'setup' dir</h1>
 			</header>
-    		<hr>
-    		<a href="<?php echo $_SERVER['SERVER_NAME']; ?>">HomePage</a>
+			<p>Now is possible to delete 'setup' dir</p>
 <?php
 }
 else
