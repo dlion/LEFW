@@ -19,14 +19,12 @@ What Can I Do With This Shit ?
 
 How Can Install It ?
 --------------------
-* If you want to try LEFW first of all you have to create a db structure. *You can find `db_structure.sql` file to do it*
-* After of it you have to modify the `core/config.php` file adding your `hostname`, `database name`, `database password` and your *`nick`*.
-* *In this moment you have to add your user manually in the database*, put your `name`, `surname`,`nick` ( *the same of nick in the config.php file* ) and a `pass` on the db so you can add, delete and modify links.
-* *In this moment you have to add General category manually in the database*, put as `label` 'General' and `description` is free, remember `General` as `label`.
+* When you put LEFW on your server and visit the index page you'll redirecto to 'setup' dir.
+* You have to insert your host, your user and password of database, your nick or name and your password.
+* With this last password you can access to your private links, **don't forgot it**.
 
 Soon
 ----
-* Possibility to add your user with registration page
 * Possibility to manage your accounts
 
 Let Me See

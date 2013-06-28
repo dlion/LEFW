@@ -16,8 +16,7 @@ class Db {
     private function __construct($dato) {
         try {
             $this->db = new PDO("mysql:host=".$dato->getHost().";dbname=".$dato->getDbName(), $dato->getDbUser(), $dato->getDbPass());
-        }
-        catch(Exception $e) {
+        }catch(Exception $e) {
             die($e->getMessage());
         }
     }
