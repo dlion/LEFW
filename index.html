@@ -1,34 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
     <title>LEFW by dlion</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
   </head>
-
   <body>
-    <header>
-      <div class="inner">
-        <h1>LEFW</h1>
-        <h2>Links Every Fuckin' Where</h2>
-        <a href="https://github.com/dlion/LEFW" class="button"><small>View project on</small>GitHub</a>
-      </div>
-    </header>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/dlion/LEFW">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/dlion/LEFW/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/dlion/LEFW/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h1>
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>LEFW</h1>
+          <p>Links Every Fuckin' Where</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/dlion">dlion</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
 <a name="lefw---links-every-fuckin-where" class="anchor" href="#lefw---links-every-fuckin-where"><span class="octicon octicon-link"></span></a>LEFW - Links Every Fuckin' Where</h1>
 
 <p>I need to save my links every fuckin' where, every day.</p>
@@ -54,18 +64,13 @@
 <a name="how-can-install-it-" class="anchor" href="#how-can-install-it-"><span class="octicon octicon-link"></span></a>How Can Install It ?</h2>
 
 <ul>
-<li>If you want to tray LEFW first of all you have to create a db structure. <em>You can find <code>db_structure.sql</code> file to do it</em>
-</li>
-<li>After of it you have to modify the <code>core/config.php</code> file adding your <code>hostname</code>, <code>database name</code>, <code>database password</code> and your <em><code>nick</code></em>.</li>
-<li>
-<em>In this moment you have to add your user manually in the database</em>, put your <code>name</code>, <code>surname</code>,<code>nick</code> ( <em>the same of nick in the config.php file</em> ) and a <code>pass</code> on the db so you can add, delete and modify links.</li>
-<li>
-<em>In this moment you have to add General category manually in the database</em>, put as <code>label</code> 'General' and <code>description</code> is free, remember <code>General</code> as <code>label</code>.</li>
+<li>When you put LEFW on your server and visit the index page you'll redirecto to 'setup' dir.</li>
+<li>You have to insert your host, your user and password of database, your nick or name and your password.</li>
+<li>With this last password you can access to your private links, <strong>don't forgot it</strong>.</li>
 </ul><h2>
 <a name="soon" class="anchor" href="#soon"><span class="octicon octicon-link"></span></a>Soon</h2>
 
 <ul>
-<li>Possibility to add your user with registration page</li>
 <li>Possibility to manage your accounts</li>
 </ul><h2>
 <a name="let-me-see" class="anchor" href="#let-me-see"><span class="octicon octicon-link"></span></a>Let Me See</h2>
@@ -86,25 +91,10 @@
 <li><code>MySQL</code></li>
 <li><code>Kube CSS Framework</code></li>
 </ul>
-        </section>
+      </section>
 
-        <aside id="sidebar">
-          <a href="https://github.com/dlion/LEFW/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/dlion/LEFW/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
-
-          <p class="repo-owner"><a href="https://github.com/dlion/LEFW"></a> is maintained by <a href="https://github.com/dlion">dlion</a>.</p>
-
-          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
     </div>
-
-  
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
   </body>
 </html>
