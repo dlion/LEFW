@@ -52,8 +52,6 @@ CREATE TABLE IF NOT EXISTS `link_profile` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nick` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `nome` varchar(100) DEFAULT NULL,
-  `cognome` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nick` (`nick`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
