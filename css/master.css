@@ -89,6 +89,7 @@ h4, h3 {
 #footer ul li {
     float: left;
     margin-left: 1.5em;
+    margin-right: 1.5em;
 }
 #footer ul li.last {
     border: none;

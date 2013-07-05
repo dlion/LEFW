@@ -16,16 +16,14 @@ What Can I Do With This Shit ?
 * You can add categories
 * You can delete categories
 * You can edit categories
+* You can change Nick
+* You can change password
 
 How Can I Install It ?
 --------------------
-* When you put LEFW on your server and visit the index page you'll redirecto to 'setup' dir.
+* When you put LEFW on your server and visit the index page you'll redirect to 'setup' dir.
 * You have to insert your host, your user and password of database, your nick or name and your password.
 * With this last password you can access to your private links, **don't forget it**.
-
-Soon
-----
-* Possibility to manage your accounts
 
 Let Me See
 ----------
@@ -40,6 +38,5 @@ Thinking and developed by [DLion] (http://dlion.it)
 Dependencies
 ------------
 * `PDO`
-* `php 5`
+* `PHP 5`
 * `MySQL`
-* `Kube CSS Framework`

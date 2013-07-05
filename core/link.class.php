@@ -22,7 +22,7 @@ class Link {
                 $this->pdo = $pdo;
             }
             else 
-                throw new Exception("Errore nell'istanziamento delle categorie!");
+                throw new Exception("Impossible istancing categories");
         }
         catch(Exception $e) {
             die($e->getMessage());

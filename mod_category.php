@@ -12,7 +12,7 @@ if(isset($_POST['name']) && isset($_POST['descr']) && isset($_POST['category_id'
 <!DOCTYPE html>
 <html>
     <head>
-        <title><?php echo htmlspecialchars($conf->getNameSite()." - ".$io['nick']); ?></title>
+        <title><?php echo htmlspecialchars($conf->getNameSite()." - ".$user->getNick()); ?></title>
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +24,7 @@ if(isset($_POST['name']) && isset($_POST['descr']) && isset($_POST['category_id'
     <body>
         <div class="wrapper">
             <header id="header" class="group">
-                <h1><?php echo htmlspecialchars($conf->getNameSite()." - ".$io['nick']); ?></h1>
+                <h1><?php echo htmlspecialchars($conf->getNameSite()." - ".$user->getNick()); ?></h1>
                 <nav class="nav-tabs">
                     <ul>
                         <li><a href='add_category.php'>Add Category</a></li>
@@ -112,6 +112,7 @@ else
 }?>
             <footer id="footer">
                 <ul id='manage_category'>
+                    <li><a href="edit_account.php">Edit Account</a> | </li>
                     <li><a href='index.php'>Public Link</a></li>
                     <li><a href="priv_link.php">Private Link</a></li>
                     <li><a href="add_link.php">Add Link</a></li>
