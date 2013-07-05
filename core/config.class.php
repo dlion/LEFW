@@ -50,7 +50,7 @@ class Config {
         return Config::name_site;
     }
     
-    public function getAdmin() {
+    public function getIdAdmin() {
         return $this->admin;
     }
     

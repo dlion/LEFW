@@ -21,28 +21,22 @@ if($INSTALL == "_TRUE_")
 	 * - @database - Name of database
 	 * - @user - User to use database
 	 * - @password - Password to use database
-	 * - @admin - Nickname of admin
+	 * - @admin - Id of admin
 	 */
 
-	$conf = Config::getIstanza('_HOST_','_DB_NAME_','_DB_USER_','_DB_PASS_','_NICK_ADMIN_');
+	$conf = Config::getIstanza('_HOST_','_DB_NAME_','_DB_USER_','_DB_PASS_','_ID_ADMIN_');
 
 	// DB and PDO istances
 	$db = Db::getIstanza($conf);
 	$db = $db->getPDO();
 	//User Istance
-	$user = User::getIstanza($conf->getAdmin(),$db);
-
-	//User Information
-	$io = array (   
-	        "id" => $user->getId(),
-	        "nick" => $user->getNick()
-	    );
+	$user = User::getIstanza($conf->getIdAdmin(),$db);
 
 	//Link Istance
-	$link = Link::getIstanza($user->getId(),$db);
+	$link = Link::getIstanza($conf->getIdAdmin(),$db);
 
 	//Category Istance
-	$category = Category::getIstanza($user->getId(),$db);
+	$category = Category::getIstanza($conf->getIdAdmin(),$db);
 }
 else
 	header("Location: /setup/install.php");

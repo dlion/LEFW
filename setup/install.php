@@ -86,7 +86,7 @@ if(isset($_POST['db_host']) && isset($_POST['db_name']) && isset($_POST['db_user
 	$str = str_replace("_DB_NAME_",$DB_NAME, $str);
 	$str = str_replace("_DB_USER_",$DB_USER, $str);
 	$str = str_replace("_DB_PASS_",$DB_PASS, $str);
-	$str = str_replace("_NICK_ADMIN_", $NICK_ADMIN, $str);
+	$str = str_replace("_ID_ADMIN_", $last_id, $str);
 	$str = str_replace("_FALSE_", "_TRUE_", $str);
 
 	//Set Config File
