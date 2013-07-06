@@ -32,7 +32,7 @@ Let Me See
 
 Who Is This Stupid Fuckin' Developer ?
 ---------------------------------------
-Thinking and developed by [DLion] (http://dlion.it)
+Thinked and developed by [DLion] (http://dlion.it)
 
 
 Dependencies
