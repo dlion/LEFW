@@ -89,7 +89,9 @@ else
         </div>
         <footer id="footer">
             <ul id='manage_category'>
-                <li><a href="edit_account.php">Edit Account</a> | </li>
+<?php
+if(isset($_SESSION['saveme'])) {
+          echo '<li><a href="edit_account.php">Edit Account</a> | </li>'; } ?>
                 <li><a href='add_category.php'>Add Category</a></li>
                 <li><a href='del_category.php'>Del Category</a></li>
                 <li><a href='mod_category.php'>Modify Category</a></li>

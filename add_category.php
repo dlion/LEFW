@@ -76,7 +76,9 @@ else
         
         <footer id="footer">
             <ul id='manage_category'>
-                <li><a href="edit_account.php">Edit Account</a> | </li>
+<?php
+if(isset($_SESSION['saveme'])) 
+          echo '<li><a href="edit_account.php">Edit Account</a> | </li>'; ?>
                 <li><a href='index.php'>Public Link</a></li>
                 <li><a href="priv_link.php">Private Link</a></li>
                 <li><a href="add_link.php">Add Link</a></li>
