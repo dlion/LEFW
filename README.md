@@ -10,7 +10,7 @@ What Can I Do With This Shit ?
 ----------------------------
 * You can divide links by category.
 * You can make links private so *you can't see it without a password*
-* You can add links 
+* You can add links
 * You can delete links
 * You can edit links
 * You can add categories
@@ -32,7 +32,7 @@ Let Me See
 
 Who Is This Stupid Fuckin' Developer ?
 ---------------------------------------
-Thinked and developed by [DLion] (http://dlion.it)
+Thought and developed by [DLion] (http://dlion.it)
 
 
 Dependencies
