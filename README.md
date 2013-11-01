@@ -10,7 +10,7 @@ What Can I Do With This Shit ?
 ----------------------------
 * You can divide links by category.
 * You can make links private so *you can't see it without a password*
-* You can add links 
+* You can add links
 * You can delete links
 * You can edit links
 * You can add categories
@@ -45,3 +45,5 @@ Dependencies
 * `php 5`
 * `MySQL`
 * `Kube CSS Framework`
+
+#### Status: Work in Progress
